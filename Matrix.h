@@ -17,18 +17,18 @@ public:
 
     double insert(int _x, int _y, double value);
 
-    Matrix &get_transponent();
+    Matrix get_transponent();
 
-    Matrix &operator*(Matrix &);
+    Matrix operator*(Matrix &);
 
-    Matrix &operator-(Matrix &);
+    Matrix operator-(Matrix );
 
 
-    Matrix &operator+(Matrix &);
+    Matrix operator+(Matrix &);
 
-    Matrix &operator*(double t);
+    Matrix operator*(double t);
 
-    double &get_at(int _x, int _y);
+    double get_at(int _x, int _y);
 
     double determinant(int _k_);
 

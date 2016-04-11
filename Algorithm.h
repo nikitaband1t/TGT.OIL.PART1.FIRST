@@ -20,6 +20,6 @@ namespace Algo {
 
     Matrix &start_algorithm(Matrix *gradient, Matrix *approximation, int &capacity, Matrix coeff);
 
-    double scalar_mul_for_grad(Matrix &, Matrix &);
+    double scalar_mul_for_grad(Matrix , Matrix &);
 };
 

@@ -11,13 +11,13 @@ Matrix::Matrix() {
 }
 
 
-double &Matrix::get_at(int _x, int _y) {
+double Matrix::get_at(int _x, int _y) {
     return (matrix.find(std::pair<int,int>(_x,_y))).operator*().second;
 }
 
 
 double Matrix::insert(int _x, int _y, double value) {
-    matrix.insert(std::pair<std::pair<int,int>,double>(std::make_pair(_x,_y),value));
+    matrix.insert(std::pair<std::pair<int,int>,double>(std::pair<int,int>(_x,_y),value));
     if (horizontal_l < _x)
         horizontal_l = _x+1;
     if (vertical_l < _y)
@@ -27,7 +27,7 @@ double Matrix::insert(int _x, int _y, double value) {
 
 
 
-Matrix &Matrix::get_transponent() {
+Matrix Matrix::get_transponent() {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
     for (int _x_ = 0; _x_ < horizontal_l; ++_x_) {
         for (int _y_ = 0; _y_ < vertical_l; ++_y_) {
@@ -39,13 +39,13 @@ Matrix &Matrix::get_transponent() {
 }
 
 
-Matrix &Matrix::operator*(Matrix &matr_arg) {
+Matrix Matrix::operator*(Matrix &matr_arg) {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
     if (horizontal_l == matr_arg.vertical_l) {
-        for (int _first_ = 0; _first_ <=vertical_l; ++_first_) {
-            for (int _second_ = 0; _second_ <=matr_arg.horizontal_l; ++_second_) {
+        for (int _first_ = 0; _first_ <= vertical_l; ++_first_) {
+            for (int _second_ = 0; _second_ <= matr_arg.horizontal_l; ++_second_) {
                 double data = 0;
-                for (int _itterate_ = 0; _itterate_ <=horizontal_l; ++_itterate_) {
+                for (int _itterate_ = 0; _itterate_ <= horizontal_l; ++_itterate_) {
                     data += get_at(_first_, _itterate_) * matr_arg.get_at(_itterate_, _second_);
                 }
                 exec_mat.get()->insert(_first_, _second_, data);
@@ -96,7 +96,7 @@ bool Matrix::is_symmetric() {
     return true;
 }
 
-Matrix &Matrix::operator+(Matrix &matr) {
+Matrix Matrix::operator+(Matrix &matr) {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
     for (int _x_ = 0; _x_ <=horizontal_l; ++_x_) {
         for (int _y_ = 0; _y_ <=vertical_l; ++_y_) {
@@ -106,7 +106,7 @@ Matrix &Matrix::operator+(Matrix &matr) {
     return *exec_mat.get();
 }
 
-Matrix &Matrix::operator-(Matrix &matr) {
+Matrix Matrix::operator-(Matrix matr) {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
     for (int _x_ = 0; _x_ <= horizontal_l; ++_x_) {
         for (int _y_ = 0; _y_ <= vertical_l; ++_y_) {
@@ -116,7 +116,7 @@ Matrix &Matrix::operator-(Matrix &matr) {
     return *exec_mat.get();
 }
 
-Matrix &Matrix::operator*(double t) {
+Matrix Matrix::operator*(double t) {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
     for (int _x_ = 0; _x_ <= horizontal_l; ++_x_) {
         for (int _y_ = 0; _y_ <= vertical_l; ++_y_) {
