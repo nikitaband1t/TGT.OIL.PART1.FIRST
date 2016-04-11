@@ -12,19 +12,17 @@ Matrix::Matrix() {
 
 
 double Matrix::get_at(int _x, int _y) {
-    return (matrix.find(std::pair<int,int>(_x,_y))).operator*().second;
+    return (matrix.find(std::pair<int, int>(_x, _y))).operator*().second;
 }
 
 
 double Matrix::insert(int _x, int _y, double value) {
-    matrix.insert(std::pair<std::pair<int,int>,double>(std::pair<int,int>(_x,_y),value));
+    matrix.insert(std::pair<std::pair<int, int>, double>(std::pair<int, int>(_x, _y), value));
     if (horizontal_l < _x)
-        horizontal_l = _x+1;
+        horizontal_l = _x + 1;
     if (vertical_l < _y)
-        vertical_l = _y+1;
+        vertical_l = _y + 1;
 }
-
-
 
 
 Matrix Matrix::get_transponent() {
@@ -32,7 +30,7 @@ Matrix Matrix::get_transponent() {
     for (int _x_ = 0; _x_ < horizontal_l; ++_x_) {
         for (int _y_ = 0; _y_ < vertical_l; ++_y_) {
             exec_mat.get()->insert(_y_, _x_,
-                                   (get_at(_y_,_x_)));
+                                   (get_at(_y_, _x_)));
         }
     }
     return *exec_mat.get();
@@ -89,17 +87,20 @@ double Matrix::determinant(int _k_) {
 /*Matrix symmetric proved by many ways
  * chosed method is criteria of Sylvester*/
 bool Matrix::is_symmetric() {
-    for (int _itt_ = 0; _itt_ <= horizontal_l; ++_itt_) {
-        if (determinant(_itt_) < 0)
-            return false;
+    if (get_transponent() == (*this)) {
+        for (int _itt_ = 0; _itt_ <= horizontal_l; ++_itt_) {
+            if (determinant(_itt_) < 0)
+                return false;
+        }
+        return true;
     }
-    return true;
+    return  false;
 }
 
 Matrix Matrix::operator+(Matrix &matr) {
     std::shared_ptr<Matrix> exec_mat(new Matrix());
-    for (int _x_ = 0; _x_ <=horizontal_l; ++_x_) {
-        for (int _y_ = 0; _y_ <=vertical_l; ++_y_) {
+    for (int _x_ = 0; _x_ <= horizontal_l; ++_x_) {
+        for (int _y_ = 0; _y_ <= vertical_l; ++_y_) {
             exec_mat.get()->insert(_x_, _y_, get_at(_x_, _y_) + matr.get_at(_x_, _y_));
         }
     }
@@ -131,8 +132,23 @@ void Matrix::represent() {
     for (int i = 0; i <= horizontal_l; ++i) {
         for (int j = 0; j <= vertical_l; ++j) {
 
-            printf("%f ",get_at(i,j));
+            printf("%f ", get_at(i, j));
         }
         printf("\n");
     }
+}
+
+bool Matrix::operator==(Matrix &tmp) {
+    if (horizontal_l = tmp.horizontal_l) {
+        if (vertical_l = tmp.vertical_l) {
+            for (int i = 0; i < horizontal_l; ++i) {
+                for (int j = 0; j < vertical_l; ++j) {
+                    if (get_at(i, j) != tmp.get_at(i, j))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+    return false;
 }

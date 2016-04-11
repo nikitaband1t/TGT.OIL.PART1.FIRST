@@ -1,17 +1,11 @@
-#include "Matrix.h"
+#include "Algorithm.h"
 #include <iostream>
 
 int main() {
-    Matrix matrix;
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            matrix.insert(i,j,1);
-        }
-    }
-
-    matrix.represent();
-    std::cout<<std::endl;
-    Matrix temp = matrix*matrix;
-    temp.represent();
+    /*
+     * Algo working only working from std,
+     * on input it takes init value x_0
+     * working until x_n not executed*/
+    Algo::gradient_algorithm(0.03);
     return 0;
 }

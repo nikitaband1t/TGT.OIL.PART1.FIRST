@@ -10,7 +10,7 @@
 #include <memory>
 
 class Matrix {
-    std::map<std::pair<int,int>, double> matrix;
+    std::map<std::pair<int, int>, double> matrix;
     int horizontal_l, vertical_l;
 public:
     Matrix();
@@ -21,12 +21,14 @@ public:
 
     Matrix operator*(Matrix &);
 
-    Matrix operator-(Matrix );
+    Matrix operator-(Matrix);
 
 
     Matrix operator+(Matrix &);
 
     Matrix operator*(double t);
+
+    bool operator==(Matrix &);
 
     double get_at(int _x, int _y);
 
