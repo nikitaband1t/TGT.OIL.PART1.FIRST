@@ -31,7 +31,7 @@ void Algo::gradient_algorithm(double x0) {
         Matrix args = fill_matrix();
         Matrix gradient = argv - (coef_matrix * args);
         Matrix approximation = gradient;
-        start_algorithm(&gradient, &approximation, capacity, coef_matrix);
+        start_algorithm(&gradient, &approximation, capacity, coef_matrix).represent();
     }
     else {
         std::cout << "Algorithm could'not be explored, matrix does'not non-negative symmetric";
